@@ -2,34 +2,42 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.scss';
 import { getJSONData } from "./tools/Toolkit";
-import { JSONData, Technology } from "./tools/data.model";
+import { Course, JSONDataTech, JSONDataCourse, Technology } from "./tools/data.model";
 import LoadingOverlay from "./LoadingOverlay/LoadingOverlay";
 import Home from "./Home/Home";
 import Error from "./Error/Error";
 import AddTechnology from './AddTechnology/AddTechnology';
 
 
-const RETRIEVE_SCRIPT:string = "http://localhost:8080/get";
+const RETRIEVE_SCRIPT_TECH:string = "http://localhost:8080/gettech";
+const RETRIEVE_SCRIPT_COURSE:string = "http://localhost:8080/getcourses";
 
 function App() {
 
 
   // ---------------------------------------------- event handlers
 
-  const onResponse = (result:JSONData) => {
+  const onResponseTech = (result:JSONDataTech) => {
     setTechnologies(result.technologies);
     console.log(result.technologies);
+    setLoading(false);
+  };
+  const onResponseCourse = (result:JSONDataCourse) => {
+    setCourses(result.courses);
+    console.log(result.courses);
     setLoading(false);
   };
 
   const onError = () => console.log("*** Error has occured during AJAX data transmission");
 
   // ---------------------------------------------- lifecycle hooks
-  React.useEffect(() => {getJSONData(RETRIEVE_SCRIPT, onResponse, onError);}, []);
+  React.useEffect(() => {getJSONData(RETRIEVE_SCRIPT_TECH, onResponseTech, onError);}, []);
+  React.useEffect(() => {getJSONData(RETRIEVE_SCRIPT_COURSE, onResponseCourse, onError);}, []);
 
   // -------------------------------------------------- State Setup --------------------------------------------------
   // Setting technologies array
   const [technologies, setTechnologies] = React.useState<Technology[]>([]);
+  const [courses, setCourses] = React.useState<Course[]>([]);
   // Loading Overlay
   const [loading, setLoading] = React.useState<boolean>(true); 
 
@@ -42,8 +50,7 @@ function App() {
       <Switch>
 
         <Route path="/" render={()=><Home technologies={technologies}/>} exact/>
-        <Route path="/AddTechnology" render={()=><AddTechnology/>} exact/>
-
+        <Route path="/AddTechnology" render={()=><AddTechnology courses={courses}/>} exact/>
         <Route render={()=><Error/>}/>
 
       </Switch>

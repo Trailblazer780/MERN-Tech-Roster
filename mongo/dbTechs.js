@@ -5,49 +5,31 @@ db.courses.drop();
 // Courses collection
 db.courses.insert([
     {
-        "cousrse":[
-            {"code":"INET2005","name":"Web Application Programming I"}
-        ]
+        "code":"INET2005","name":"Web Application Programming I"
     },
     {
-        "cousrse":[
-            {"code":"WEBD3000","name":"Web Application Programming II"}
-        ]
+        "code":"WEBD3000","name":"Web Application Programming II"
     },
     {
-        "cousrse":[
-            {"code":"PROG2700","name":"Client Side Programming"}
-        ]
+        "code":"PROG2700","name":"Client Side Programming"
     },
     {
-        "cousrse":[
-            {"code":"PROG3017","name":"Full Stack Programming"}
-        ]
+        "code":"PROG3017","name":"Full Stack Programming"
     },
     {
-        "cousrse":[
-            {"code":"WEBD3027","name":"Developing for Content Management Systems"}
-        ]
+        "code":"WEBD3027","name":"Developing for Content Management Systems"
     },
     {
-        "cousrse":[
-            {"code":"WEBD1000","name":"Website Development"}
-        ]
+        "code":"WEBD1000","name":"Website Development" 
     },
     {
-        "cousrse":[
-            {"code":"APPD1001","name":"User Interface Design and Development"}
-        ]
+        "code":"APPD1001","name":"User Interface Design and Development"
     },
     {
-        "cousrse":[
-            {"code":"PROG1400","name":"Intro to Object Oriented Programming"}
-        ]
+        "code":"PROG1400","name":"Intro to Object Oriented Programming"
     },
     {
-        "cousrse":[
-            {"code":"PROG1700","name":"Logic and Programming"}
-        ]
+        "code":"PROG1700","name":"Logic and Programming"
     }
 ]);
 
