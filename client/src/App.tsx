@@ -2,10 +2,11 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.scss';
 import { getJSONData } from "./tools/Toolkit";
-import { Course, JSONDataTech, JSONDataCourse, Technology } from "./tools/data.model";
+import { Course, JSONDataTech, JSONDataCourse, Technology, EditProps} from "./tools/data.model";
 import LoadingOverlay from "./LoadingOverlay/LoadingOverlay";
 import Home from "./Home/Home";
 import DeleteTechnology from "./DeleteTechnology/DeleteTechnology";
+import EditTechnology from "./EditTechnology/EditTechnology";
 import Error from "./Error/Error";
 import AddTechnology from './AddTechnology/AddTechnology';
 
@@ -54,6 +55,7 @@ function App() {
         <Route path="/" render={()=><Home technologies={technologies}/>} exact/>
         <Route path="/AddTechnology" render={()=><AddTechnology courses={courses}/>} exact/>
         <Route path="/deletetechnology/:id" render={()=><DeleteTechnology technologies={technologies}/> } exact/>
+        <Route path="/edittechnology/:id" render={()=><EditTechnology technologies={technologies}/>} exact/>
         <Route render={()=><Error/>}/>
 
       </Switch>

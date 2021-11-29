@@ -1,15 +1,16 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
-import './AddTechnology.scss';
-import {ComponentProps, CourseProps, Technology, Course} from './../tools/data.model';
+import './EditTechnology.scss';
+import {ComponentProps, CourseProps, Technology, Course, EditProps} from './../tools/data.model';
+import { useParams } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
-const SEND_SCRIPT_TECHNOLOGY:string = "http://localhost:8080"
-const SEND_SCRIPT_GET_COURSE_DATA:string = "http://localhost:8080/getcourseinfo";
 
+const EditTechnology = ({technologies}:ComponentProps) => {
 
-const AddTechnology = ({courses}:CourseProps) => {
-
+    let { id } = useParams<{ id: string }>();
+    // Check the id 
+    console.log("recived id: " + id);
 
     const submitTechnology = (e: any) => {
         console.log(name);
@@ -26,12 +27,24 @@ const AddTechnology = ({courses}:CourseProps) => {
         // Adding the ID's of the checked checkboxes to the values array
         checkboxes.forEach((checkbox) => {values.push(checkbox.id);});
     } 
+    let technology:(Technology|undefined) = technologies.find(item => item._id === id);
+
+    if(!technology){
+        technology = {
+            _id: "",
+            name: "",
+            description: "",
+            difficulty: 1,
+            courses: []
+        }
+    }
 
     // -------------------------------------------------- State Variables -------------------------------------------------
-    const [name, setName] = React.useState<string>("");
-    const [description, setDescription] = React.useState<string>("");
-    const [difficulty, setDifficulty] = React.useState<number>(1);
+    const [name, setName] = React.useState<string>(technology.name);
+    const [description, setDescription] = React.useState<string>(technology.description);
+    const [difficulty, setDifficulty] = React.useState<number>(technology.difficulty);
     const [values, setValues] = React.useState<string[]>([]);
+
 
     // -------------------------------------------------- Event Handlers --------------------------------------------------
     const handleSelectChange = (e: any) => {
@@ -52,19 +65,19 @@ const AddTechnology = ({courses}:CourseProps) => {
 
     return (
         <div>
-            <h1>Add Technology:</h1><br></br>
+            <h1>Edit Technology:</h1><br></br>
             <Form>
                 <Form.Group className="mb-3" controlId="newTechForm.Name">
                     <Form.Label>Technology Name:</Form.Label>
-                    <Form.Control type="text" placeholder="Name" value={name} onChange={(e:any) => handleNameChange(e.target.value)}/>
+                    <Form.Control type="text" placeholder="Name" defaultValue={technology.name} onChange={(e:any) => handleNameChange(e.target.value)}/>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="newTechForm.Description">
                     <Form.Label>Technology Description</Form.Label>
-                    <Form.Control as="textarea" placeholder="Description" rows={3} value={description} onChange={(e:any) => handleDescChange(e.target.value)}/>
+                    <Form.Control as="textarea" placeholder="Description" rows={3} defaultValue={technology.description} onChange={(e:any) => handleDescChange(e.target.value)}/>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="newTechform.DifficultySelect">
                     <Form.Label>Select Difficulty</Form.Label>
-                    <Form.Select onChange={(e:any) => handleSelectChange(e.target.value)}>
+                    <Form.Select defaultValue={technology.difficulty} onChange={(e:any) => handleSelectChange(e.target.value)}>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -72,12 +85,12 @@ const AddTechnology = ({courses}:CourseProps) => {
                         <option value="5">5</option>
                     </Form.Select>      
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="newTechform.DifficultySelect">
+                {/* <Form.Group className="mb-3" controlId="newTechform.DifficultySelect">
                     <Form.Label>Used in courses:</Form.Label>
                     {courses.map((data:Course, n:number) => 
-                        <Form.Check key={n} type="checkbox" label={data.code + " " + data.name} id={data._id}/>
+                        <Form.Check type="checkbox" label={data.code + " " + data.name} id={data._id}/>
                     )}
-                </Form.Group>  
+                </Form.Group>   */}
             </Form>
             <Button variant="success" onClick={(e:any) => {submitTechnology(e); getCheckedValues(e)}}>Ok</Button>{' '}
             <Link to={`/`}><Button variant="secondary">Cancel</Button>{' '}</Link>
@@ -86,4 +99,4 @@ const AddTechnology = ({courses}:CourseProps) => {
     
 }
 
-export default AddTechnology;
+export default EditTechnology;
