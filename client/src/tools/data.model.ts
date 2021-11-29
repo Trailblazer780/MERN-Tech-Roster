@@ -27,7 +27,7 @@ export interface ComponentProps {
 }
 
 export interface EditProps {
-    technology:Technology;
+    technologies:Technology[];
     courses:Course[];
 }
 

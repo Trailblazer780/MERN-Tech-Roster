@@ -55,7 +55,7 @@ function App() {
         <Route path="/" render={()=><Home technologies={technologies}/>} exact/>
         <Route path="/AddTechnology" render={()=><AddTechnology courses={courses}/>} exact/>
         <Route path="/deletetechnology/:id" render={()=><DeleteTechnology technologies={technologies}/> } exact/>
-        <Route path="/edittechnology/:id" render={()=><EditTechnology technologies={technologies}/>} exact/>
+        <Route path="/edittechnology/:id" render={()=><EditTechnology technologies={technologies} courses={courses}/>} exact/>
         <Route render={()=><Error/>}/>
 
       </Switch>
