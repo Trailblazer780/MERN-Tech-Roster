@@ -4,6 +4,8 @@ import './AddTechnology.scss';
 import {ComponentProps, CourseProps, Technology, Course} from './../tools/data.model';
 import {Link} from 'react-router-dom';
 
+const SEND_SCRIPT_TECHNOLOGY:string = "http://localhost:8080"
+const SEND_SCRIPT_GET_COURSE_DATA = "http://localhost:8080/getcourseinfo";
 
 
 const AddTechnology = ({courses}:CourseProps) => {
@@ -13,12 +15,23 @@ const AddTechnology = ({courses}:CourseProps) => {
         console.log(name);
         console.log(description);
         console.log(difficulty);
+        console.log(values);
     }
+
+    const getCheckedValues = (e: any) => {
+        // seting values to empty array
+        setValues([]);
+        // Getting all of the checkboxes that are checked
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+        // Adding the ID's of the checked checkboxes to the values array
+        checkboxes.forEach((checkbox) => {values.push(checkbox.id);});
+    } 
 
     // -------------------------------------------------- State Variables -------------------------------------------------
     const [name, setName] = React.useState<string>("");
     const [description, setDescription] = React.useState<string>("");
     const [difficulty, setDifficulty] = React.useState<number>(1);
+    const [values, setValues] = React.useState<string[]>([]);
 
     // -------------------------------------------------- Event Handlers --------------------------------------------------
     const handleSelectChange = (e: any) => {
@@ -34,7 +47,7 @@ const AddTechnology = ({courses}:CourseProps) => {
     const handleNameChange = (e: any) => {
         setName(e);
         console.log(name);
-    }   
+    }
 
 
     return (
@@ -66,7 +79,7 @@ const AddTechnology = ({courses}:CourseProps) => {
                     )}
                 </Form.Group>  
             </Form>
-            <Button variant="success" onClick={submitTechnology}>Ok</Button>{' '}
+            <Button variant="success" onClick={(e:any) => {submitTechnology(e); getCheckedValues(e)}}>Ok</Button>{' '}
             <Link to={`/`}><Button variant="secondary">Cancel</Button>{' '}</Link>
         </div>
     )

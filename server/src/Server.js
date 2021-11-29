@@ -45,6 +45,8 @@ app.get("/gettech", async (request, response) => {
         mongoClient.close();
     }
 });
+
+
 app.get("/getcourses", async (request, response) => {
     // construct a MongoClient object, passing in additional options
     let mongoClient = new MongoClient(URL, { useUnifiedTopology: true });

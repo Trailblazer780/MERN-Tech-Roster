@@ -4,7 +4,7 @@ import {ComponentProps, Technology, Course} from './../tools/data.model';
 import { useParams } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Button } from 'react-bootstrap';
 
 const Home = ({technologies}:ComponentProps) => {
@@ -13,13 +13,13 @@ const Home = ({technologies}:ComponentProps) => {
     return(
         <div className="content">
             <div className="content__section">
-                <div className="content__caption">Click the technology name below to find out what courses require it:</div>
+                <h3 className="content__caption">Technologies:</h3>
                 <div className="content__list">
                 <Link to={`/AddTechnology`}><Button variant="success"><FontAwesomeIcon icon={faPlus} /></Button>{' '}</Link>
                 </div>
                 {technologies.map((data:Technology, n:number) => 
                     <div key={n} className="content__list">
-                        <Link to={`/tech/${data._id}`}>{data.name}</Link>
+                        <Button variant="secondary"><FontAwesomeIcon icon={faPencilAlt}/></Button>{''} <Button variant="danger"><FontAwesomeIcon icon={faTrash}/></Button> {data.name}
                     </div>
                 )}
             </div>

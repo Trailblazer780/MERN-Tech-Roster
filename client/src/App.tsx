@@ -37,6 +37,7 @@ function App() {
   // -------------------------------------------------- State Setup --------------------------------------------------
   // Setting technologies array
   const [technologies, setTechnologies] = React.useState<Technology[]>([]);
+  // Setting courses array
   const [courses, setCourses] = React.useState<Course[]>([]);
   // Loading Overlay
   const [loading, setLoading] = React.useState<boolean>(true); 
