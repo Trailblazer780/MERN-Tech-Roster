@@ -5,6 +5,7 @@ import { getJSONData } from "./tools/Toolkit";
 import { Course, JSONDataTech, JSONDataCourse, Technology } from "./tools/data.model";
 import LoadingOverlay from "./LoadingOverlay/LoadingOverlay";
 import Home from "./Home/Home";
+import DeleteTechnology from "./DeleteTechnology/DeleteTechnology";
 import Error from "./Error/Error";
 import AddTechnology from './AddTechnology/AddTechnology';
 
@@ -52,6 +53,7 @@ function App() {
 
         <Route path="/" render={()=><Home technologies={technologies}/>} exact/>
         <Route path="/AddTechnology" render={()=><AddTechnology courses={courses}/>} exact/>
+        <Route path="/deletetechnology/:id" render={()=><DeleteTechnology technologies={technologies}/> } exact/>
         <Route render={()=><Error/>}/>
 
       </Switch>

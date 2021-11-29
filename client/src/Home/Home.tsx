@@ -19,7 +19,7 @@ const Home = ({technologies}:ComponentProps) => {
                 </div>
                 {technologies.map((data:Technology, n:number) => 
                     <div key={n} className="content__list">
-                        <Button variant="secondary"><FontAwesomeIcon icon={faPencilAlt}/></Button>{''} <Button variant="danger"><FontAwesomeIcon icon={faTrash}/></Button> {data.name}
+                        <Button variant="secondary"><FontAwesomeIcon icon={faPencilAlt}/></Button>{''} <Link to={`/deletetechnology/`+data._id}><Button variant="danger"><FontAwesomeIcon icon={faTrash}/></Button></Link> {data.name}
                     </div>
                 )}
             </div>
