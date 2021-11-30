@@ -11,8 +11,7 @@ import Error from "./Error/Error";
 import AddTechnology from './AddTechnology/AddTechnology';
 
 
-const RETRIEVE_SCRIPT_TECH:string = "http://localhost:8080/gettech";
-const RETRIEVE_SCRIPT_COURSE:string = "http://localhost:8080/getcourses";
+const RETRIEVE_SCRIPT_TECH:string = "http://localhost:8080/get";
 
 function App() {
 
@@ -21,12 +20,8 @@ function App() {
 
   const onResponseTech = (result:JSONDataTech) => {
     setTechnologies(result.technologies);
-    console.log(result.technologies);
-    setLoading(false);
-  };
-  const onResponseCourse = (result:JSONDataCourse) => {
     setCourses(result.courses);
-    console.log(result.courses);
+    console.log(result.technologies);
     setLoading(false);
   };
 
@@ -34,7 +29,6 @@ function App() {
 
   // ---------------------------------------------- lifecycle hooks
   React.useEffect(() => {getJSONData(RETRIEVE_SCRIPT_TECH, onResponseTech, onError);}, []);
-  React.useEffect(() => {getJSONData(RETRIEVE_SCRIPT_COURSE, onResponseCourse, onError);}, []);
 
   // -------------------------------------------------- State Setup --------------------------------------------------
   // Setting technologies array

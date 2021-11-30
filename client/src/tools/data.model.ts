@@ -2,6 +2,7 @@
 
 export interface JSONDataTech {
     technologies: Technology[];
+    courses: Course[];
 }
 
 export interface JSONDataCourse {
