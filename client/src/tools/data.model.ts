@@ -28,6 +28,18 @@ export interface ComponentProps {
     reRender:Function;
 }
 
+export interface DeleteCourseProps {
+    technologies:Technology[];
+    courses:Course[];
+    reRender:Function;
+}
+
+export interface HomeProps {
+    technologies:Technology[];
+    courses:Course[];
+    reRender:Function;
+}
+
 export interface EditProps {
     technologies:Technology[];
     courses:Course[];
@@ -36,6 +48,7 @@ export interface EditProps {
 
 export interface CourseProps {
     courses: Course[];
+    reRender: Function;
 }
 
 export interface LoadingOverlayProps {

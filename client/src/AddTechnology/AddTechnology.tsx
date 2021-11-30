@@ -2,17 +2,32 @@ import React from 'react';
 import { Button, Form } from 'react-bootstrap';
 import './AddTechnology.scss';
 import {ComponentProps, CourseProps, Technology, Course} from './../tools/data.model';
+import { sendJSONData } from '../tools/Toolkit';
 import {Link} from 'react-router-dom';
 
+const ADD_TECHNOLOGY_SCRIPT = "http://localhost:8080/addtech";
 
-const AddTechnology = ({courses}:CourseProps) => {
+const AddTechnology = ({courses, reRender}:CourseProps) => {
 
+
+    const onResponse  = () => {
+        console.log("*** Successfully edited technology");
+        window.location.href = "/";
+        reRender();
+    }
+
+    const onError = () => console.log("*** Error has occured during AJAX data transmission");
 
     const submitTechnology = (e: any) => {
-        console.log(name);
-        console.log(description);
-        console.log(difficulty);
-        console.log(values);
+        let tempValues = values.map(value => {
+            console.log("value: "+value);
+            return courses.find(course => course._id === value);
+        });
+
+        let jsonString = JSON.stringify({name: name, description: description, difficulty: difficulty, courses: tempValues});
+        console.log("jsonString: " + jsonString);
+        
+        sendJSONData(ADD_TECHNOLOGY_SCRIPT, jsonString, onResponse, onError);
     }
 
     const getCheckedValues = (e: any) => {
@@ -76,7 +91,7 @@ const AddTechnology = ({courses}:CourseProps) => {
                     )}
                 </Form.Group>  
             </Form>
-            <Button variant="success" onClick={(e:any) => {submitTechnology(e); getCheckedValues(e)}}>Ok</Button>{' '}
+            <Button variant="success" onClick={(e:any) => {getCheckedValues(e); submitTechnology(e);}}>Ok</Button>{' '}
             <Link to={`/`}><Button variant="secondary">Cancel</Button>{' '}</Link>
         </div>
     )

@@ -9,6 +9,9 @@ import DeleteTechnology from "./DeleteTechnology/DeleteTechnology";
 import EditTechnology from "./EditTechnology/EditTechnology";
 import Error from "./Error/Error";
 import AddTechnology from './AddTechnology/AddTechnology';
+import AddCourse from './AddCourse/AddCourse';
+import EditCourse from './EditCourse/EditCourse';
+import DeleteCourse from './DeleteCourse/DeleteCourse';
 
 
 const RETRIEVE_SCRIPT_TECH:string = "http://localhost:8080/get";
@@ -50,10 +53,13 @@ function App() {
       {(technologies.length > 0) ?
       <Switch>
 
-        <Route path="/" render={()=><Home technologies={technologies} reRender={reRender}/>} exact/>
-        <Route path="/AddTechnology" render={()=><AddTechnology courses={courses}/>} exact/>
+        <Route path="/" render={()=><Home technologies={technologies} courses={courses} reRender={reRender}/>} exact/>
+        <Route path="/AddTechnology" render={()=><AddTechnology courses={courses} reRender={reRender}/>} exact/>
+        <Route path="/addcourse" render={()=><AddCourse courses={courses} reRender={reRender}/>} exact/>
         <Route path="/deletetechnology/:id" render={()=><DeleteTechnology technologies={technologies} reRender={reRender}/> } exact/>
+        <Route path="/deletecourse/:id" render={()=><DeleteCourse technologies={technologies} courses={courses} reRender={reRender}/> } exact/>
         <Route path="/edittechnology/:id" render={()=><EditTechnology technologies={technologies} courses={courses} reRender={reRender}/>} exact/>
+        <Route path="/editcourse/:id" render={()=><EditCourse technologies={technologies} courses={courses} reRender={reRender}/>} exact/>
         <Route render={()=><Error/>}/>
 
       </Switch>

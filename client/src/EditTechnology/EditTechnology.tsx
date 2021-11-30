@@ -7,13 +7,10 @@ import { useParams } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
 const EDIT_TECHNOLOGY_SCRIPT = "http://localhost:8080/edittech";
-// const RETRIEVE_SCRIPT_TECH:string = "http://localhost:8080/get";
 
 const EditTechnology = ({technologies, courses, reRender}:EditProps) => {
 
     let { id } = useParams<{ id: string }>();
-    // Check the id 
-    // console.log("recived id: " + id);
 
     const onResponse  = () => {
         console.log("*** Successfully edited technology");
@@ -30,7 +27,7 @@ const EditTechnology = ({technologies, courses, reRender}:EditProps) => {
         });
 
         let jsonString = JSON.stringify({_id: id, name: name, description: description, difficulty: difficulty, courses: tempValues});
-        console.log("jsonString: " + jsonString);   
+        console.log("jsonString: " + jsonString);
         
         putJSONData(EDIT_TECHNOLOGY_SCRIPT, jsonString, onResponse, onError);
     }

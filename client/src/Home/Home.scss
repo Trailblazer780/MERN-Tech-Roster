@@ -32,3 +32,14 @@
         }
     }
 }
+#wrapper {
+    width: auto;
+    overflow: hidden; /* add this to contain floated children */
+}
+#first {
+    width: 400px;
+    float:left; /* add this */
+}
+#second {
+    float: left; /* add this */
+}
