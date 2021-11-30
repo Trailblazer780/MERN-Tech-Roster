@@ -18,23 +18,21 @@ const DeleteTechnology = ({technologies}:ComponentProps) => {
         console.log("Delete id: " + id);
     };
 
-
-    if (technology === undefined) {
-        return <div>
-            <h1>Technology not found</h1>
-            <Link to="/">Back to home</Link>
-        </div>
-    }
-
     return (
-        <div>
-            <h1>Delete Technology</h1>
-            <div className="mb-3">Are you sure you want to delete the following technology?</div>
-            <div className="mb-3">{technology.name}</div>
+        (technology === undefined) ?
+            <div>
+                <h1>Technology not found</h1>
+                <Link to="/">Back to home</Link>
+            </div>
+        :
+            <div>
+                <h1>Delete Technology</h1>
+                <div className="mb-3">Are you sure you want to delete the following technology?</div>
+                <div className="mb-3">{technology.name}</div>
 
-            <Button variant="success" onClick={onDelete}>Ok</Button>{' '}
-            <Link to={`/`}><Button variant="secondary">Cancel</Button>{' '}</Link>
-        </div>
+                <Button variant="success" onClick={onDelete}>Ok</Button>{' '}
+                <Link to={`/`}><Button variant="secondary">Cancel</Button>{' '}</Link>
+            </div>
     )
 
 }

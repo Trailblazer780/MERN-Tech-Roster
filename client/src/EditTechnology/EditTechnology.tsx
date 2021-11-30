@@ -100,10 +100,8 @@ const EditTechnology = ({technologies, courses}:EditProps) => {
                     <Form.Group className="mb-3" controlId="newTechform.DifficultySelect">
                         <Form.Label>Used in courses:</Form.Label>
                         {courses.map((data:Course, n:number) => 
-                            // turnary operator to check if the course is in the technology
                             // if course is in intech array, check the checkbox
                             <Form.Check key={n} type="checkbox" id={data._id} label={data.code + " " + data.name} defaultChecked={intech.includes(data.code)}/>
-                            // <Form.Check key={n} type="checkbox" label={data.code + " " + data.name} id={data._id}/>
                         )}
                     </Form.Group>  
                 </Form>

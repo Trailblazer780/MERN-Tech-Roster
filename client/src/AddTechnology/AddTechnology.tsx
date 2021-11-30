@@ -4,9 +4,6 @@ import './AddTechnology.scss';
 import {ComponentProps, CourseProps, Technology, Course} from './../tools/data.model';
 import {Link} from 'react-router-dom';
 
-const SEND_SCRIPT_TECHNOLOGY:string = "http://localhost:8080"
-const SEND_SCRIPT_GET_COURSE_DATA:string = "http://localhost:8080/getcourseinfo";
-
 
 const AddTechnology = ({courses}:CourseProps) => {
 
