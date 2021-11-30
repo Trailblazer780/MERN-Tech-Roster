@@ -80,8 +80,10 @@ app.post("/post", async (request, response) => {
 });
 
 
-app.put("/put/:id", async (request, response) => {
+app.put("/edittech", async (request, response) => {
     let mongoClient = new MongoClient(URL, { useUnifiedTopology: true });
+    let id = new ObjectId(request.sanitize(request.body._id));
+    console.log(request.body._id);
     // Use connect method to connect to the server
     try {
         await mongoClient.connect(); 
@@ -89,7 +91,7 @@ app.put("/put/:id", async (request, response) => {
         let techCollection = mongoClient.db(DB_NAME).collection("technologies");
 
         // isolating route parameter
-        let id = new ObjectId(request.sanitize(request.params.id));
+        // let id = new ObjectId(request.sanitize(request.params._id));
 
         // sanitize form input
         request.body.name = request.sanitize(request.body.name);
@@ -124,19 +126,21 @@ app.put("/put/:id", async (request, response) => {
     }
 });
 
-app.delete("/delete/:id", async (request, response) => {
+app.delete("/deletetech", async (request, response) => {
     // construct MongoClient object for working with MongoDB
     let mongoClient = new MongoClient(URL, { useUnifiedTopology: true });
-    // Use connect method to connect to the server
+    
+    let id = new ObjectId(request.sanitize(request.body._id));
+
     try {
         await mongoClient.connect();
         // get reference to desired collection in DB
         let techCollection = mongoClient.db(DB_NAME).collection("technologies");
         // isolate route parameter
-        let id = new ObjectId(request.sanitize(request.params.id));
-        
         let selector = { "_id": id };
+
         let result = await techCollection.deleteOne(selector); 
+
         // status code for created
         if (result.deletedCount <= 0) {
             response.status(404);

@@ -25,11 +25,13 @@ export interface Course {
 
 export interface ComponentProps {
     technologies:Technology[];
+    reRender:Function;
 }
 
 export interface EditProps {
     technologies:Technology[];
     courses:Course[];
+    reRender:Function;
 }
 
 export interface CourseProps {

@@ -65,6 +65,49 @@ function sendJSONData(sendScript:string, jsonString:string, success:Function, fa
     xmlhttp.send(jsonString);
 }
 
+function deleteJSONData(sendScript:string, jsonString:string, success:Function, failure:Function):void {
+    // send out AJAX request
+    let xmlhttp:XMLHttpRequest = new XMLHttpRequest();
+    xmlhttp.addEventListener("load", (e:Event) => {
+        // has the response been received successfully?
+        if (xmlhttp.status === 200) {
+            // data retrieved - call success method and pass along XML object response
+            success(xmlhttp.responseText);
+        } else {
+            failure();
+        }
+    });
+    xmlhttp.addEventListener("error", (e:Event) => {
+        failure();
+    });
+    xmlhttp.open("DELETE", sendScript, true);
+    // setting the content-type of the request so the server knows what format that data is coming as
+    xmlhttp.setRequestHeader("Content-Type", "application/json");
+    xmlhttp.send(jsonString);
+}
+
+function putJSONData(sendScript:string, jsonString:string, success:Function, failure:Function):void {
+    // send out AJAX request
+    let xmlhttp:XMLHttpRequest = new XMLHttpRequest();
+    xmlhttp.addEventListener("load", (e:Event) => {
+        // has the response been received successfully?
+        if (xmlhttp.status === 200) {
+            // data retrieved - call success method and pass along XML object response
+            success(xmlhttp.responseText);
+        } else {
+            failure();
+        }
+    });
+    xmlhttp.addEventListener("error", (e:Event) => {
+        failure();
+    });
+    xmlhttp.open("PUT", sendScript, true);
+    // setting the content-type of the request so the server knows what format that data is coming as
+    xmlhttp.setRequestHeader("Content-Type", "application/json");
+    xmlhttp.send(jsonString);
+}
+
+
 function getJSONData(retrieveScript:string, success:Function, failure:Function):void {
     fetch(retrieveScript)
         .then((response:Response) => response.json())
@@ -72,4 +115,4 @@ function getJSONData(retrieveScript:string, success:Function, failure:Function):
         .catch((err:Error) => failure());
 }
 
-export {getRandom, addKey, getXMLData, sendJSONData, getJSONData};
+export {getRandom, addKey, getXMLData, sendJSONData, getJSONData, deleteJSONData, putJSONData};

@@ -27,8 +27,12 @@ function App() {
 
   const onError = () => console.log("*** Error has occured during AJAX data transmission");
 
+  const reRender = () => {
+    getJSONData(RETRIEVE_SCRIPT_TECH, onResponseTech, onError);
+  }
+
   // ---------------------------------------------- lifecycle hooks
-  React.useEffect(() => {getJSONData(RETRIEVE_SCRIPT_TECH, onResponseTech, onError);}, []);
+  React.useEffect(() => {reRender();}, []);
 
   // -------------------------------------------------- State Setup --------------------------------------------------
   // Setting technologies array
@@ -46,10 +50,10 @@ function App() {
       {(technologies.length > 0) ?
       <Switch>
 
-        <Route path="/" render={()=><Home technologies={technologies}/>} exact/>
+        <Route path="/" render={()=><Home technologies={technologies} reRender={reRender}/>} exact/>
         <Route path="/AddTechnology" render={()=><AddTechnology courses={courses}/>} exact/>
-        <Route path="/deletetechnology/:id" render={()=><DeleteTechnology technologies={technologies}/> } exact/>
-        <Route path="/edittechnology/:id" render={()=><EditTechnology technologies={technologies} courses={courses}/>} exact/>
+        <Route path="/deletetechnology/:id" render={()=><DeleteTechnology technologies={technologies} reRender={reRender}/> } exact/>
+        <Route path="/edittechnology/:id" render={()=><EditTechnology technologies={technologies} courses={courses} reRender={reRender}/>} exact/>
         <Route render={()=><Error/>}/>
 
       </Switch>
