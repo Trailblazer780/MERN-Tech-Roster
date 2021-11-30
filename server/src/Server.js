@@ -226,20 +226,26 @@ app.delete("/deletetech", async (request, response) => {
     }
 });
 
+
+
 app.delete("/deletecourse", async (request, response) => {
     // construct MongoClient object for working with MongoDB
     let mongoClient = new MongoClient(URL, { useUnifiedTopology: true });
     
     let id = new ObjectId(request.sanitize(request.body._id));
-
+    console.log(id);
     try {
         await mongoClient.connect();
         // get reference to desired collection in DB
         let courseCollection = mongoClient.db(DB_NAME).collection("courses");
+        let techCollection = mongoClient.db(DB_NAME).collection("technologies");
         // isolate route parameter
-        let selector = { "_id": id };
+        let selector = { _id: id };
+        let result = await courseCollection.deleteOne(selector);
 
-        let result = await courseCollection.deleteOne(selector); 
+        let techSelector = { "course": {_id: id, } };
+        let techNewValues = { $unset: { "course": { _id: id } } };
+        let techResult = await techCollection.updateMany(techSelector, techNewValues);
 
         // status code for created
         if (result.deletedCount <= 0) {

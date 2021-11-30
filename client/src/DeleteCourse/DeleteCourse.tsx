@@ -42,7 +42,7 @@ const DeleteCourse = ({technologies, courses, reRender}:DeleteCourseProps) => {
         :
             <div>
                 <h1>Delete Technology</h1>
-                <div className="mb-3">Are you sure you want to delete the following technology?</div>
+                <div className="mb-3">Are you sure you want to delete the following course?</div>
                 <div className="mb-3"> {course.code} {course.name}</div>
 
                 <Button variant="success" onClick={onDelete}>Ok</Button>{' '}
