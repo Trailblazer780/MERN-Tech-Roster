@@ -60,7 +60,6 @@ const EditTechnology = ({technologies, courses, reRender}:EditProps) => {
 
     let intech: string[] = []; 
     technology.courses.forEach((course:Course) => {intech.push(course.code);});
-    // console.log(intech);
 
     // -------------------------------------------------- Event Handlers --------------------------------------------------
     const handleSelectChange = (e: any) => {

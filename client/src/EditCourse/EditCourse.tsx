@@ -20,14 +20,13 @@ const EditCourse = ({technologies, courses, reRender}:EditProps) => {
 
     const onError = () => console.log("*** Error has occured during AJAX data transmission");
 
-    const submitEditCourse = (e: any) => {
+    const submitEditCourse = () => {
         let jsonString = JSON.stringify({_id: id, name: name});
         console.log("jsonString: " + jsonString);
         putJSONData(EDIT_COURSE_SCRIPT, jsonString, onResponse, onError);
     }
 
     let course:(Course|undefined) = courses.find(item => item._id === id);
-
 
     // -------------------------------------------------- State Variables -------------------------------------------------
 
@@ -38,16 +37,36 @@ const EditCourse = ({technologies, courses, reRender}:EditProps) => {
         </div>
     }
 
-    let name = course.name;
-    let code = course.code;
+    // -------------------------------------------------- Variables ------------------------------------------------------------
+    let name:string = course.name;
+    let code:string = course.code;
 
+    // -------------------------------------------------- Input Checking --------------------------------------------------------
+    const checkCode = () => {
+        let y = document.getElementById("btnOk");
+        let z = document.getElementById("nameVerification");
+        if(name == ""){
+            if (y != null && z != null) {
+                console.log("name not empty");
+                y.setAttribute("disabled", "disabled");
+                z.innerHTML = "Name is required";
+            }
+        } 
+        else if (name != "") {
+            if (y != null && z != null) {
+                y.removeAttribute("disabled")
+                z.innerHTML = "";
+            }
+        }
+    }
+    
     // -------------------------------------------------- Event Handlers --------------------------------------------------
     
     const handleNameChange = (e: any) => {
         name = e;
+        checkCode();
         console.log(name);
     }
-
 
     return (
         (course === undefined) ?
@@ -65,10 +84,11 @@ const EditCourse = ({technologies, courses, reRender}:EditProps) => {
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="newTechForm.Description">
                         <Form.Label>Name:</Form.Label>
-                        <Form.Control type="text" defaultValue={course.name} onChange={(e:any) => handleNameChange(e.target.value)}/>
+                        <Form.Control type="text" defaultValue={course.name} onChange={(e:any) => {handleNameChange(e.target.value);}}/>
+                        <span id="nameVerification" className="text-danger"></span>
                     </Form.Group>
                 </Form>
-                <Button variant="success" onClick={(e:any) => {submitEditCourse(e);}}>Ok</Button>{' '}
+                <Button id="btnOk" variant="success" onClick={(e:any) => {submitEditCourse();}}>Ok</Button>{' '}
                 <Link to={`/`}><Button variant="secondary">Cancel</Button>{' '}</Link>
             </div>
     )
