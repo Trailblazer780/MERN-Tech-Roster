@@ -33,7 +33,7 @@ const EditCourse = ({technologies, courses, reRender}:EditProps) => {
     if (course === undefined) {
         return <div>
             <h1>Technology not found</h1>
-            <Link to="/">Back to home</Link>
+            <Link to="/"><Button variant="success">Back to home</Button></Link>
         </div>
     }
 
@@ -72,7 +72,7 @@ const EditCourse = ({technologies, courses, reRender}:EditProps) => {
         (course === undefined) ?
             <div>
                 <h1>Course not found</h1>
-                <Link to="/">Back to home</Link>
+                <Link to="/"><Button variant="success">Back to home</Button></Link>
             </div>
         :
             <div>

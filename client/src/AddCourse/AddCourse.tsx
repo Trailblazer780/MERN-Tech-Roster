@@ -7,7 +7,6 @@ import {Link} from 'react-router-dom';
 
 const ADD_TECHNOLOGY_SCRIPT = "http://localhost:8080/addcourse";
 let array:String[] = [];
-let codeValid:string = "false";
 let code:string = "";
 let name:string = "";
 const AddCourse = ({courses, reRender}:CourseProps) => {
@@ -37,20 +36,19 @@ const AddCourse = ({courses, reRender}:CourseProps) => {
         sendJSONData(ADD_TECHNOLOGY_SCRIPT, jsonString, onResponse, onError);
     }
 
+    // -------------------------------------------------- Input Checking --------------------------------------------------
     const checkCode = () => {
         console.log("code: " + code);
         let x = document.getElementById("codeVerification");
         let y = document.getElementById("btnOk");
         let z = document.getElementById("nameVerification");
         if (array.includes(code.toLowerCase())) {
-            codeValid = "false";
             if (x != null && y != null) {
                 x.innerHTML = "Code already exists";
                 y.setAttribute("disabled", "disabled");
             }
         }
         else if (array.includes(code.toLowerCase()) && name == "") {
-            codeValid = "false";
             if (x != null && y != null && z != null) {
                 x.innerHTML = "Code already exists";
                 y.setAttribute("disabled", "disabled");
@@ -58,7 +56,6 @@ const AddCourse = ({courses, reRender}:CourseProps) => {
             }
         }
         else if (name == "" && code == "") {
-            codeValid = "false";
             if (x != null && y != null && z != null) {
                 x.innerHTML = "Code is required";
                 y.setAttribute("disabled", "disabled");
@@ -66,7 +63,6 @@ const AddCourse = ({courses, reRender}:CourseProps) => {
             }
         }
         else if (code != "" && name == "") {
-            codeValid = "false";
             if (x != null && y != null && z != null) {
                 x.innerHTML = "";
                 y.setAttribute("disabled", "disabled");
@@ -74,7 +70,6 @@ const AddCourse = ({courses, reRender}:CourseProps) => {
             }
         }
         else if (code == "" && name != "") {
-            codeValid = "false";
             if (x != null && y != null && z != null) {
                 x.innerHTML = "Code is required";
                 y.setAttribute("disabled", "disabled");
@@ -83,30 +78,29 @@ const AddCourse = ({courses, reRender}:CourseProps) => {
         }
         else if(name != "" && code != "" && array.includes(code.toLowerCase()) == false) {
             let x = document.getElementById("codeVerification");
-            codeValid = "true";
             if (x != null && y != null && z != null) {
                 x.innerHTML = "";
                 y.removeAttribute("disabled");
                 z.innerHTML = "";
             }
-            console.log("codeValid: " + codeValid);
         }
     }
+
+    // -------------------------------------------------- Lifecycle Hooks --------------------------------------------------
 
     React.useEffect(() => {checkCode();}, []);
 
     // -------------------------------------------------- Event Handlers --------------------------------------------------
 
     const handleCodeChange = (e: any) => {
-        // setCode(e);
         code = e;
         checkCode();
-        console.log(code);
+        // console.log(code);
     }
     
     const handleNameChange = (e: any) => {
         name = e;
-        console.log(name);
+        // console.log(name);
     }
 
     return (

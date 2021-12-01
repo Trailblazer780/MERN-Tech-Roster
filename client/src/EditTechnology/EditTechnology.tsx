@@ -50,16 +50,56 @@ const EditTechnology = ({technologies, courses, reRender}:EditProps) => {
     if (technology === undefined) {
         return <div>
             <h1>Technology not found</h1>
-            <Link to="/">Back to home</Link>
+            <Link to="/"><Button variant="success">Back to home</Button></Link>
         </div>
     }
 
+    // -------------------------------------------------- Form Variables -------------------------------------------------
     let name = technology.name;
     let description = technology.description;
     let difficulty = technology.difficulty;
 
+    // -------------------------------------------------- Get Courses -------------------------------------------------
     let intech: string[] = []; 
     technology.courses.forEach((course:Course) => {intech.push(course.code);});
+
+    // -------------------------------------------------- Input Checking -------------------------------------------------
+    const checkCode = () => {
+        let x = document.getElementById("nameVerification");
+        let y = document.getElementById("descVerification");
+        let z = document.getElementById("btnOk");
+        console.log("CheckingInputs");
+        if (name == "" && description == ""){
+            console.log("Empty");
+            if(x != null && y != null && z != null){
+                x.innerHTML = "Name is required";
+                y.innerHTML = "Description is required";
+                z.setAttribute("disabled", "disabled");
+            }
+        }
+        else if (name != "" && description == ""){
+            if(x != null && y != null && z != null){
+                x.innerHTML = "";
+                y.innerHTML = "Description is required";
+                z.setAttribute("disabled", "disabled");
+            }
+        }
+        else if (name == "" && description != ""){
+            if(x != null && y != null && z != null){
+                x.innerHTML = "Name is required";
+                y.innerHTML = "";
+                z.setAttribute("disabled", "disabled");
+            }
+        }
+        else if (name != "" && description != ""){
+            if(x != null && y != null && z != null){
+                x.innerHTML = "";
+                y.innerHTML = "";
+                z.removeAttribute("disabled");
+            }
+        }
+
+    }
 
     // -------------------------------------------------- Event Handlers --------------------------------------------------
     const handleSelectChange = (e: any) => {
@@ -69,11 +109,13 @@ const EditTechnology = ({technologies, courses, reRender}:EditProps) => {
 
     const handleDescChange = (e: any) => {
         description = e;
+        checkCode();
         console.log(description);
     }   
     
     const handleNameChange = (e: any) => {
         name = e;
+        checkCode();
         console.log(name);
     }
 
@@ -82,7 +124,7 @@ const EditTechnology = ({technologies, courses, reRender}:EditProps) => {
         (technology === undefined) ?
             <div>
                 <h1>Technology not found</h1>
-                <Link to="/">Back to home</Link>
+                <Link to="/"><Button variant="success">Back to home</Button></Link>
             </div>
         :
             <div>
@@ -91,10 +133,12 @@ const EditTechnology = ({technologies, courses, reRender}:EditProps) => {
                     <Form.Group className="mb-3" controlId="newTechForm.Name">
                         <Form.Label>Technology Name:</Form.Label>
                         <Form.Control type="text" placeholder="Name" defaultValue={technology.name} onChange={(e:any) => handleNameChange(e.target.value)}/>
+                        <span id="nameVerification" className="text-danger"></span>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="newTechForm.Description">
                         <Form.Label>Technology Description</Form.Label>
                         <Form.Control as="textarea" placeholder="Description" rows={3} defaultValue={technology.description} onChange={(e:any) => handleDescChange(e.target.value)}/>
+                        <span id="descVerification" className="text-danger"></span>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="newTechform.DifficultySelect">
                         <Form.Label>Select Difficulty</Form.Label>
@@ -114,7 +158,7 @@ const EditTechnology = ({technologies, courses, reRender}:EditProps) => {
                         )}
                     </Form.Group>  
                 </Form>
-                <Button variant="success" onClick={(e:any) => {getCheckedValues(e); submitTechnology(e);}}>Ok</Button>{' '}
+                <Button id="btnOk" variant="success" onClick={(e:any) => {getCheckedValues(e); submitTechnology(e);}}>Ok</Button>{' '}
                 <Link to={`/`}><Button variant="secondary">Cancel</Button>{' '}</Link>
             </div>
     )

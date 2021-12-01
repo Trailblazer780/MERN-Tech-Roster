@@ -6,7 +6,8 @@ import { sendJSONData } from '../tools/Toolkit';
 import {Link} from 'react-router-dom';
 
 const ADD_TECHNOLOGY_SCRIPT = "http://localhost:8080/addtech";
-
+let name:string = "";
+let description:string = "";
 const AddTechnology = ({courses, reRender}:CourseProps) => {
 
 
@@ -39,25 +40,68 @@ const AddTechnology = ({courses, reRender}:CourseProps) => {
         checkboxes.forEach((checkbox) => {values.push(checkbox.id);});
     } 
 
+    // -------------------------------------------------- Input Checking --------------------------------------------------
+    const checkCode = () => {
+        let x = document.getElementById("nameVerification");
+        let y = document.getElementById("descVerification");
+        let z = document.getElementById("btnOk");
+        console.log("CheckingInputs");
+        if (name == "" && description == ""){
+            console.log("Empty");
+            if(x != null && y != null && z != null){
+                x.innerHTML = "Name is required";
+                y.innerHTML = "Description is required";
+                z.setAttribute("disabled", "disabled");
+            }
+        }
+        else if (name != "" && description == ""){
+            if(x != null && y != null && z != null){
+                x.innerHTML = "";
+                y.innerHTML = "Description is required";
+                z.setAttribute("disabled", "disabled");
+            }
+        }
+        else if (name == "" && description != ""){
+            if(x != null && y != null && z != null){
+                x.innerHTML = "Name is required";
+                y.innerHTML = "";
+                z.setAttribute("disabled", "disabled");
+            }
+        }
+        else if (name != "" && description != ""){
+            if(x != null && y != null && z != null){
+                x.innerHTML = "";
+                y.innerHTML = "";
+                z.removeAttribute("disabled");
+            }
+        }
+
+    }
+
     // -------------------------------------------------- State Variables -------------------------------------------------
-    const [name, setName] = React.useState<string>("");
-    const [description, setDescription] = React.useState<string>("");
     const [difficulty, setDifficulty] = React.useState<number>(1);
     const [values, setValues] = React.useState<string[]>([]);
 
+
+    // -------------------------------------------------- Lifecylce Hooks --------------------------------------------------
+    React.useEffect(() => {checkCode();}, []);
+    
     // -------------------------------------------------- Event Handlers --------------------------------------------------
+
     const handleSelectChange = (e: any) => {
         setDifficulty(e);
         console.log(difficulty);
     }
 
     const handleDescChange = (e: any) => {
-        setDescription(e);
+        description = e;
+        checkCode();
         console.log(description);
     }   
     
     const handleNameChange = (e: any) => {
-        setName(e);
+        name = e;
+        checkCode();
         console.log(name);
     }
 
@@ -68,11 +112,13 @@ const AddTechnology = ({courses, reRender}:CourseProps) => {
             <Form>
                 <Form.Group className="mb-3" controlId="newTechForm.Name">
                     <Form.Label>Technology Name:</Form.Label>
-                    <Form.Control type="text" placeholder="Name" value={name} onChange={(e:any) => handleNameChange(e.target.value)}/>
+                    <Form.Control type="text" placeholder="Name" onChange={(e:any) => handleNameChange(e.target.value)}/>
+                    <span id="nameVerification" className="text-danger"></span>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="newTechForm.Description">
                     <Form.Label>Technology Description</Form.Label>
-                    <Form.Control as="textarea" placeholder="Description" rows={3} value={description} onChange={(e:any) => handleDescChange(e.target.value)}/>
+                    <Form.Control as="textarea" placeholder="Description" rows={3} onChange={(e:any) => {handleDescChange(e.target.value); checkCode()}}/>
+                    <span id="descVerification" className="text-danger"></span>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="newTechform.DifficultySelect">
                     <Form.Label>Select Difficulty</Form.Label>
@@ -91,7 +137,7 @@ const AddTechnology = ({courses, reRender}:CourseProps) => {
                     )}
                 </Form.Group>  
             </Form>
-            <Button variant="success" onClick={(e:any) => {getCheckedValues(e); submitTechnology(e);}}>Ok</Button>{' '}
+            <Button id="btnOk" variant="success" onClick={(e:any) => {getCheckedValues(e); submitTechnology(e);}}>Ok</Button>{' '}
             <Link to={`/`}><Button variant="secondary">Cancel</Button>{' '}</Link>
         </div>
     )

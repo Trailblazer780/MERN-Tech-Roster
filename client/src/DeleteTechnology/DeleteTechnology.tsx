@@ -37,7 +37,7 @@ const DeleteTechnology = ({technologies, reRender}:ComponentProps) => {
         (technology === undefined) ?
             <div>
                 <h1>Technology not found</h1>
-                <Link to="/">Back to home</Link>
+                <Link to="/"><Button variant="success">Back to home</Button></Link>
             </div>
         :
             <div>
