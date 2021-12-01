@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Form } from 'react-bootstrap';
 import './EditTechnology.scss';
 import {Technology, Course, EditProps} from './../tools/data.model';
-import { sendJSONData, getJSONData, putJSONData } from '../tools/Toolkit';
+import {putJSONData } from '../tools/Toolkit';
 import { useParams } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
@@ -23,10 +23,21 @@ const EditTechnology = ({technologies, courses, reRender}:EditProps) => {
     const submitTechnology = (e: any) => {
         let tempValues = values.map(value => {
             console.log("value: "+value);
+            // remove the _id field from the array
             return courses.find(course => course._id === value);
         });
+        // map through tempValues and make an object with the course code and course name 
+        let tempCourses = tempValues.map(course => {
+            return {
+                // make the course not possibly undefined
+                code: course ? course.code : "",
+                name: course ? course.name : ""
+            }
+        });
+        // make a jsonstring out of the temp values
 
-        let jsonString = JSON.stringify({_id: id, name: name, description: description, difficulty: difficulty, courses: tempValues});
+        let jsonString = JSON.stringify({_id: id, name: name, description: description, difficulty: difficulty, courses: tempCourses});
+        // remove the _id field from the json string in courses 
         console.log("jsonString: " + jsonString);
         
         putJSONData(EDIT_TECHNOLOGY_SCRIPT, jsonString, onResponse, onError);
@@ -40,8 +51,8 @@ const EditTechnology = ({technologies, courses, reRender}:EditProps) => {
         // Adding the ID's of the checked checkboxes to the values array
         checkboxes.forEach((checkbox) => {values.push(checkbox.id);});
     } 
-    let technology:(Technology|undefined) = technologies.find(item => item._id === id);
 
+    let technology:(Technology|undefined) = technologies.find(item => item._id === id);
 
     // -------------------------------------------------- State Variables -------------------------------------------------
     const [values, setValues] = React.useState<string[]>([]);
@@ -69,30 +80,30 @@ const EditTechnology = ({technologies, courses, reRender}:EditProps) => {
         let y = document.getElementById("descVerification");
         let z = document.getElementById("btnOk");
         console.log("CheckingInputs");
-        if (name == "" && description == ""){
+        if (name === "" && description === ""){
             console.log("Empty");
-            if(x != null && y != null && z != null){
+            if(x !== null && y !== null && z !== null){
                 x.innerHTML = "Name is required";
                 y.innerHTML = "Description is required";
                 z.setAttribute("disabled", "disabled");
             }
         }
-        else if (name != "" && description == ""){
-            if(x != null && y != null && z != null){
+        else if (name !== "" && description === ""){
+            if(x !== null && y !== null && z !== null){
                 x.innerHTML = "";
                 y.innerHTML = "Description is required";
                 z.setAttribute("disabled", "disabled");
             }
         }
-        else if (name == "" && description != ""){
-            if(x != null && y != null && z != null){
+        else if (name === "" && description !== ""){
+            if(x !== null && y !== null && z !== null){
                 x.innerHTML = "Name is required";
                 y.innerHTML = "";
                 z.setAttribute("disabled", "disabled");
             }
         }
-        else if (name != "" && description != ""){
-            if(x != null && y != null && z != null){
+        else if (name !== "" && description !== ""){
+            if(x !== null && y !== null && z !== null){
                 x.innerHTML = "";
                 y.innerHTML = "";
                 z.removeAttribute("disabled");

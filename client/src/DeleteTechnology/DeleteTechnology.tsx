@@ -1,8 +1,8 @@
 import React from 'react';
 import './DeleteTechnology.scss';
-import {ComponentProps, Technology, Course} from './../tools/data.model';
-import { Button, Form } from 'react-bootstrap';
-import { sendJSONData, deleteJSONData} from '../tools/Toolkit';
+import {ComponentProps, Technology} from './../tools/data.model';
+import { Button} from 'react-bootstrap';
+import {deleteJSONData} from '../tools/Toolkit';
 import { useParams } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
 import './AddTechnology.scss';
-import {ComponentProps, CourseProps, Technology, Course} from './../tools/data.model';
+import {CourseProps, Course} from './../tools/data.model';
 import { sendJSONData } from '../tools/Toolkit';
 import {Link} from 'react-router-dom';
 
@@ -25,7 +25,15 @@ const AddTechnology = ({courses, reRender}:CourseProps) => {
             return courses.find(course => course._id === value);
         });
 
-        let jsonString = JSON.stringify({name: name, description: description, difficulty: difficulty, courses: tempValues});
+        let tempCourses = tempValues.map(course => {
+            return {
+                // make the course not possibly undefined
+                code: course ? course.code : "",
+                name: course ? course.name : ""
+            }
+        });
+
+        let jsonString = JSON.stringify({name: name, description: description, difficulty: difficulty, courses: tempCourses});
         console.log("jsonString: " + jsonString);
         
         sendJSONData(ADD_TECHNOLOGY_SCRIPT, jsonString, onResponse, onError);
@@ -46,30 +54,30 @@ const AddTechnology = ({courses, reRender}:CourseProps) => {
         let y = document.getElementById("descVerification");
         let z = document.getElementById("btnOk");
         console.log("CheckingInputs");
-        if (name == "" && description == ""){
+        if (name === "" && description === ""){
             console.log("Empty");
-            if(x != null && y != null && z != null){
+            if(x !== null && y != null && z !== null){
                 x.innerHTML = "Name is required";
                 y.innerHTML = "Description is required";
                 z.setAttribute("disabled", "disabled");
             }
         }
-        else if (name != "" && description == ""){
-            if(x != null && y != null && z != null){
+        else if (name !== "" && description === ""){
+            if(x != null && y !== null && z !== null){
                 x.innerHTML = "";
                 y.innerHTML = "Description is required";
                 z.setAttribute("disabled", "disabled");
             }
         }
-        else if (name == "" && description != ""){
-            if(x != null && y != null && z != null){
+        else if (name === "" && description !== ""){
+            if(x != null && y !== null && z !== null){
                 x.innerHTML = "Name is required";
                 y.innerHTML = "";
                 z.setAttribute("disabled", "disabled");
             }
         }
-        else if (name != "" && description != ""){
-            if(x != null && y != null && z != null){
+        else if (name !== "" && description !== ""){
+            if(x != null && y !== null && z !== null){
                 x.innerHTML = "";
                 y.innerHTML = "";
                 z.removeAttribute("disabled");
@@ -85,7 +93,7 @@ const AddTechnology = ({courses, reRender}:CourseProps) => {
 
     // -------------------------------------------------- Lifecylce Hooks --------------------------------------------------
     React.useEffect(() => {checkCode();}, []);
-    
+
     // -------------------------------------------------- Event Handlers --------------------------------------------------
 
     const handleSelectChange = (e: any) => {

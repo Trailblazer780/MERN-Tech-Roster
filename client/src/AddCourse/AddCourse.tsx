@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
 import './AddCourse.scss';
-import {ComponentProps, CourseProps, Technology, Course} from './../tools/data.model';
+import {CourseProps} from './../tools/data.model';
 import { sendJSONData } from '../tools/Toolkit';
 import {Link} from 'react-router-dom';
 
@@ -48,35 +48,35 @@ const AddCourse = ({courses, reRender}:CourseProps) => {
                 y.setAttribute("disabled", "disabled");
             }
         }
-        else if (array.includes(code.toLowerCase()) && name == "") {
-            if (x != null && y != null && z != null) {
+        else if (array.includes(code.toLowerCase()) && name === "") {
+            if (x !== null && y != null && z !== null) {
                 x.innerHTML = "Code already exists";
                 y.setAttribute("disabled", "disabled");
                 z.innerHTML = "Name is required";
             }
         }
-        else if (name == "" && code == "") {
+        else if (name === "" && code === "") {
             if (x != null && y != null && z != null) {
                 x.innerHTML = "Code is required";
                 y.setAttribute("disabled", "disabled");
                 z.innerHTML = "Name is required";
             }
         }
-        else if (code != "" && name == "") {
+        else if (code !== "" && name === "") {
             if (x != null && y != null && z != null) {
                 x.innerHTML = "";
                 y.setAttribute("disabled", "disabled");
                 z.innerHTML = "Name is required";
             }
         }
-        else if (code == "" && name != "") {
+        else if (code === "" && name !== "") {
             if (x != null && y != null && z != null) {
                 x.innerHTML = "Code is required";
                 y.setAttribute("disabled", "disabled");
                 z.innerHTML = "";
             }
         }
-        else if(name != "" && code != "" && array.includes(code.toLowerCase()) == false) {
+        else if(name !== "" && code !== "" && array.includes(code.toLowerCase()) === false) {
             let x = document.getElementById("codeVerification");
             if (x != null && y != null && z != null) {
                 x.innerHTML = "";

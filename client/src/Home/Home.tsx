@@ -1,7 +1,6 @@
 import React from 'react';
 import './Home.scss';
-import {ComponentProps, Technology, Course, HomeProps} from './../tools/data.model';
-import { useParams } from 'react-router-dom';
+import {Technology, Course, HomeProps} from './../tools/data.model';
 import {Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons'

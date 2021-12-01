@@ -1,8 +1,8 @@
 import React from 'react';
 import './DeleteCourse.scss';
-import {ComponentProps, Technology, Course, DeleteCourseProps} from './../tools/data.model';
-import { Button, Form } from 'react-bootstrap';
-import { sendJSONData, deleteJSONData} from '../tools/Toolkit';
+import {Course, DeleteCourseProps} from './../tools/data.model';
+import { Button} from 'react-bootstrap';
+import {deleteJSONData} from '../tools/Toolkit';
 import { useParams } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
@@ -27,8 +27,8 @@ const DeleteCourse = ({technologies, courses, reRender}:DeleteCourseProps) => {
 
     const onDelete = () => {
         console.log("Delete course id: " + id);
-        // make json string to send with the id 
-        let jsonString = JSON.stringify({_id: id});
+        // make json string to send with the id
+        let jsonString = JSON.stringify({_id: id, code: course?.code});
         console.log("jsonString: " + jsonString);
         deleteJSONData(DELETE_TECHNOLOGY, jsonString, onResponse, onError);
     };

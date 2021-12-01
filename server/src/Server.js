@@ -233,6 +233,7 @@ app.delete("/deletecourse", async (request, response) => {
     let mongoClient = new MongoClient(URL, { useUnifiedTopology: true });
     
     let id = new ObjectId(request.sanitize(request.body._id));
+    let code = request.sanitize(request.body.code);
     console.log(id);
     try {
         await mongoClient.connect();
@@ -242,8 +243,8 @@ app.delete("/deletecourse", async (request, response) => {
         // isolate route parameter
         let selector = { _id: id };
         let result = await courseCollection.deleteOne(selector);
-        console.log("result: " + id);
-        let techResult = await techCollection.updateMany({'courses._id': id.toString()}, {$pull: {'courses':{'_id': id.toString()}}});
+        console.log("result: " + code);
+        let techResult = await techCollection.updateMany({'courses.code': code.toString()}, {$pull: {'courses':{'code': code.toString()}}});
 
         console.log(id.toString());
 

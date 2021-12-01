@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
 import './EditCourse.scss';
-import {Technology, Course, EditProps} from './../tools/data.model';
-import { sendJSONData, getJSONData, putJSONData } from '../tools/Toolkit';
+import {Course, EditProps} from './../tools/data.model';
+import {putJSONData } from '../tools/Toolkit';
 import { useParams } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
@@ -45,15 +45,15 @@ const EditCourse = ({technologies, courses, reRender}:EditProps) => {
     const checkCode = () => {
         let y = document.getElementById("btnOk");
         let z = document.getElementById("nameVerification");
-        if(name == ""){
-            if (y != null && z != null) {
+        if(name === ""){
+            if (y !== null && z !== null) {
                 console.log("name not empty");
                 y.setAttribute("disabled", "disabled");
                 z.innerHTML = "Name is required";
             }
         } 
-        else if (name != "") {
-            if (y != null && z != null) {
+        else if (name !== "") {
+            if (y !== null && z !== null) {
                 y.removeAttribute("disabled")
                 z.innerHTML = "";
             }
@@ -80,7 +80,7 @@ const EditCourse = ({technologies, courses, reRender}:EditProps) => {
                 <Form>
                     <Form.Group className="mb-3" controlId="newTechForm.Name">
                         <Form.Label>Course Code:</Form.Label>
-                        <Form.Control type="text" disabled placeholder="Name" defaultValue={course.code}/>
+                        <Form.Control type="text" disabled placeholder="Name" defaultValue={code}/>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="newTechForm.Description">
                         <Form.Label>Name:</Form.Label>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.scss';
 import { getJSONData } from "./tools/Toolkit";
-import { Course, JSONDataTech, JSONDataCourse, Technology, EditProps} from "./tools/data.model";
+import { Course, JSONDataTech, Technology} from "./tools/data.model";
 import LoadingOverlay from "./LoadingOverlay/LoadingOverlay";
 import Home from "./Home/Home";
 import DeleteTechnology from "./DeleteTechnology/DeleteTechnology";
@@ -19,7 +19,7 @@ const RETRIEVE_SCRIPT_TECH:string = "http://localhost:8080/get";
 function App() {
 
 
-  // ---------------------------------------------- event handlers
+  // ---------------------------------------------- event handlers ----------------------------------------------
 
   const onResponseTech = (result:JSONDataTech) => {
     setTechnologies(result.technologies);
@@ -34,7 +34,7 @@ function App() {
     getJSONData(RETRIEVE_SCRIPT_TECH, onResponseTech, onError);
   }
 
-  // ---------------------------------------------- lifecycle hooks
+  // ---------------------------------------------- lifecycle hooks ----------------------------------------------
   React.useEffect(() => {reRender();}, []);
 
   // -------------------------------------------------- State Setup --------------------------------------------------
