@@ -242,10 +242,10 @@ app.delete("/deletecourse", async (request, response) => {
         // isolate route parameter
         let selector = { _id: id };
         let result = await courseCollection.deleteOne(selector);
+        console.log("result: " + id);
+        let techResult = await techCollection.updateMany({'courses._id': id.toString()}, {$pull: {'courses':{'_id': id.toString()}}});
 
-        let techSelector = { "course": {_id: id, } };
-        let techNewValues = { $unset: { "course": { _id: id } } };
-        let techResult = await techCollection.updateMany(techSelector, techNewValues);
+        console.log(id.toString());
 
         // status code for created
         if (result.deletedCount <= 0) {
@@ -255,6 +255,7 @@ app.delete("/deletecourse", async (request, response) => {
         }
         response.status(200);
         response.send(result);
+        response.send(techResult);
     } catch (error) {
         response.status(500);
         response.send({error: error.message});
