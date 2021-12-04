@@ -6,7 +6,7 @@ import {deleteJSONData} from '../tools/Toolkit';
 import { useParams } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
-const DELETE_TECHNOLOGY = "/deletetech";
+const DELETE_TECHNOLOGY = "http://localhost:8080/deletetech";
 
 const DeleteTechnology = ({technologies, reRender}:ComponentProps) => {
 

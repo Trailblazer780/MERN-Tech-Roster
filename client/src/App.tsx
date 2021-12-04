@@ -14,7 +14,7 @@ import EditCourse from './EditCourse/EditCourse';
 import DeleteCourse from './DeleteCourse/DeleteCourse';
 
 
-const RETRIEVE_SCRIPT_TECH:string = "/get";
+const RETRIEVE_SCRIPT_TECH:string = "http://localhost:8080/get";
 
 function App() {
 
@@ -50,7 +50,6 @@ function App() {
       <LoadingOverlay bgColor="#a72f57" spinnerColor="#FFFFFF" enabled={loading} />
 
       <div className="header">_Technology Roster -- Admin</div>
-      {(technologies.length > 0) ?
       <Switch>
 
         <Route path="/" render={()=><Home technologies={technologies} courses={courses} reRender={reRender}/>} exact/>
@@ -63,8 +62,6 @@ function App() {
         <Route render={()=><Error/>}/>
 
       </Switch>
-      : 
-      <div>There are currently no technologies and courses in the database </div>}
       <div className="footer">Web App powered by MERN Stack</div>
     </div>
   );
