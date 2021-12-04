@@ -6,7 +6,7 @@ import {putJSONData } from '../tools/Toolkit';
 import { useParams } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
-const EDIT_TECHNOLOGY_SCRIPT = "http://localhost:8080/edittech";
+const EDIT_TECHNOLOGY_SCRIPT = "/edittech";
 
 const EditTechnology = ({technologies, courses, reRender}:EditProps) => {
 
