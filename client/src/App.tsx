@@ -14,7 +14,7 @@ import EditCourse from './EditCourse/EditCourse';
 import DeleteCourse from './DeleteCourse/DeleteCourse';
 
 
-const RETRIEVE_SCRIPT_TECH:string = "http://localhost:8080/get";
+const RETRIEVE_SCRIPT_TECH:string = "/get";
 
 function App() {
 

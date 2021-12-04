@@ -6,7 +6,7 @@ import {putJSONData } from '../tools/Toolkit';
 import { useParams } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
-const EDIT_COURSE_SCRIPT = "http://localhost:8080/editcourse";
+const EDIT_COURSE_SCRIPT = "/editcourse";
 
 const EditCourse = ({technologies, courses, reRender}:EditProps) => {
 
