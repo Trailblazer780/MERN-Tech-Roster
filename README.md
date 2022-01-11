@@ -26,7 +26,7 @@ Below is a screenshot of the web application in use:
 ![alt text](https://github.com/Trailblazer780/mern-stack-app/blob/master/Picture/Picture3.JPG)
 
 ## Deleting A Technology:
-![alt text](https://github.com/Trailblazer780/mern-stack-app/blob/master/Picture/Picture7.JPG)
+![alt text](https://github.com/Trailblazer780/mern-stack-app/blob/master/Picture/picture7.JPG)
 
 ## Editing A Course:
 ![alt text](https://github.com/Trailblazer780/mern-stack-app/blob/master/Picture/Picture4.JPG)
