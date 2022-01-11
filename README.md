@@ -1,25 +1,15 @@
-# Boilerplate for PROG3017 Full Stack Programming with Express Server and MongoDB
+# PROG 3017(Full Stack Programming) Project 3
+## Course and Technology Manager
 
-This project folder contains the React client side and the Express Server side with MondoDB
+This program is written using the MERN stack and it is a web application that can be used
+to manage courses and technologies. You are able to view all of the technologies and courses.
+You are able to make changes to their names and description along with what courses are used
+in a certain technology.
 
-## Available Scripts
 
-In the project directory, you can run:
+You must have docker installed on your computer to use this web application
 
-### `docker compose build`
-
-To build the docker container images
-
-### `docker compose up`
-
-Spins up the container that runs the local server (React web app)
-Spins up the container that runs the Express server (running on Node.js)
-Spins up the container that runs the MongoDB server
-
-### `docker compose -f docker-compose-prod.yml build`
-Builds docker container images for production build
-
-### `docker compose -f docker-compose-prod.yml up`
-
-Spins up the container that runs the Express server (running on Node.js) that handles the API requests as well as serves the client side's index.html
-Spins up the container that runs the MongoDB server
+1. Open the project folder in VSCode.
+2. In the terminal run the command `docker compose up --build`
+4. Open a web browser and hit `https://localhost:3000`
+5. Open a web browser and hit `https://localhost:8080/get` to get the web API
