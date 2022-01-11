@@ -1,5 +1,5 @@
 # PROG 3017(Full Stack Programming) Project 3
-## Course and Technology Manager
+## Tech Roster
 
 This program is written using the MERN stack and it is a web application that can be used
 to manage courses and technologies. You are able to view all of the technologies and courses.
