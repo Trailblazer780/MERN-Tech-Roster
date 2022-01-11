@@ -13,3 +13,26 @@ You must have docker installed on your computer to use this web application
 2. In the terminal run the command `docker compose up --build`
 4. Open a web browser and hit `https://localhost:3000`
 5. Open a web browser and hit `https://localhost:8080/get` to get the web API
+
+
+Below is a screenshot of the web application in use:
+## Fist hit of web app:
+![alt text](https://github.com/Trailblazer780/mern-stack-app/blob/master/Picture/Picture1.JPG)
+
+## Editing A Technology:
+![alt text](https://github.com/Trailblazer780/mern-stack-app/blob/master/Picture/Picture2.JPG)
+
+## Adding A Technology:
+![alt text](https://github.com/Trailblazer780/mern-stack-app/blob/master/Picture/Picture3.JPG)
+
+## Deleting A Technology:
+![alt text](https://github.com/Trailblazer780/mern-stack-app/blob/master/Picture/Picture7.JPG)
+
+## Editing A Course:
+![alt text](https://github.com/Trailblazer780/mern-stack-app/blob/master/Picture/Picture4.JPG)
+
+## Adding A Course:
+![alt text](https://github.com/Trailblazer780/mern-stack-app/blob/master/Picture/Picture5.JPG)
+
+## Deleting A Course:
+![alt text](https://github.com/Trailblazer780/mern-stack-app/blob/master/Picture/Picture6.JPG)
