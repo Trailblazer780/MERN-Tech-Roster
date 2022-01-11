@@ -5,7 +5,7 @@ import {CourseProps} from './../tools/data.model';
 import { sendJSONData } from '../tools/Toolkit';
 import {Link} from 'react-router-dom';
 
-const ADD_TECHNOLOGY_SCRIPT = "/addcourse";
+const ADD_TECHNOLOGY_SCRIPT = "http://localhost:8080/addcourse";
 let array:String[] = [];
 let code:string = "";
 let name:string = "";
